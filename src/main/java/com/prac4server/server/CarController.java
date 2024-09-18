@@ -17,28 +17,28 @@ public class CarController {
         this.carService = carService;
     }
 
-    @MessageMapping("getCar")
+    @MessageMapping("addCar")
     public Mono<Car> createCar(@RequestBody Car car) {
         return Mono.justOrEmpty(carService.newCar(car));
     }
 
-    @MessageMapping("addCar")
+    @MessageMapping("getCar")
     public Mono<Car> getCar(@PathVariable Integer id) {
         return Mono.justOrEmpty(carService.getCarById(id));
     }
 
-    @GetMapping("getCars")
+    @MessageMapping("getCars")
     public Flux<Car> getAll() {
         return carService.getCarAll();
     }
 
-    @DeleteMapping("deleteCar")
+    @MessageMapping("deleteCar")
     public Mono<Void> deleteCar(@PathVariable Integer id) {
         carService.deleteCarById(id);
         return Mono.empty();
     }
 
-    @GetMapping("carChannel")
+    @MessageMapping("carChannel")
     public Flux<Car> getChannel(Flux<Car> cars) {
         return carService.getChannel(cars);
     }
